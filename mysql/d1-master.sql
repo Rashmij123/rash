@@ -168,6 +168,7 @@ SELECT Round(1234.5754, 2);
 SELECT Round(1234.5734, -1);
 
 SELECT Round(1235.5734, -1);
+SELECT Round(1265.5734, -2);
 
 SELECT Round(1235.5734, -3);
 
@@ -365,3 +366,310 @@ GROUP BY FIRST_NAME
 HAVING COUNT(FIRST_NAME) > 1
 )
 ORDER BY FIRST_NAME DESC;
+
+--LOGICAL OPERATORS
+-- AND
+SELECT *
+FROM sakila.actor
+WHERE first_name = 'KENNETH';
+
+SELECT *
+FROM sakila.actor
+WHERE first_name = 'KENNETH' AND actor_id < 100;
+
+SELECT *
+FROM sakila.actor
+WHERE first_name = 'KENNETH' AND actor_id < 100 AND last_name = 'TORN';
+
+
+-- OR
+SELECT *
+FROM sakila.actor
+WHERE first_name = 'KENNETH';
+
+SELECT *
+FROM sakila.actor
+WHERE first_name = 'KENNETH' OR actor_id < 100; 
+
+SELECT *
+FROM sakila.actor
+WHERE first_name = 'KENNETH' OR actor_id < 100 OR last_name = 'TEMPLE';
+
+
+-- NOT
+SELECT actor_id, first_name, last_name
+FROM sakila.actor
+WHERE NOT actor_id = 5;
+
+SELECT actor_id, first_name, last_name
+FROM sakila.actor
+WHERE actor_id <> 5;
+
+SELECT *
+FROM sakila.actor
+WHERE first_name = 'KENNETH' AND actor_id < 100 OR last_name = 'TEMPLE';
+
+SELECT *
+FROM sakila.actor
+WHERE first_name = 'KENNETH' OR last_name = 'TEMPLE' AND actor_id < 100;
+
+SELECT *
+FROM sakila.actor
+WHERE (first_name = 'KENNETH' AND actor_id < 100) OR last_name = 'TEMPLE';
+
+SELECT *
+FROM sakila.actor
+WHERE first_name = 'KENNETH' AND (actor_id < 100 OR last_name = 'TEMPLE');
+
+SELECT *
+FROM sakila.actor
+WHERE (first_name = 'KENNETH' OR last_name = 'TEMPLE') AND actor_id < 100;
+
+SELECT *
+FROM sakila.actor
+WHERE first_name = 'KENNETH' OR (last_name = 'TEMPLE' AND actor_id < 100);
+
+SELECT *
+FROM sakila.actor
+WHERE NOT (first_name = 'KENNETH' OR (last_name = 'TEMPLE' AND actor_id < 100));
+
+SELECT *
+FROM sakila.actor
+WHERE first_name = 'KENNETH' OR NOT(last_name = 'TEMPLE' AND actor_id < 100);
+
+-- WHERE clause Comparison Operators
+-- Comparison OPERATORS (= != >= <=)  
+-- MODIFIED Comparison OPERATORS IN
+SELECT *
+FROM sakila.actor
+WHERE first_name = 'NICK' OR  first_name =  'JOHNNY';
+
+
+SELECT *
+FROM sakila.actor
+WHERE first_name IN ('NICK','JOHNNY');
+
+SELECT *
+FROM sakila.actor
+WHERE first_name = 'NICK' OR  first_name =  'JOHNNY';
+
+SELECT *
+FROM sakila.actor
+WHERE first_name  != 'NICK' AND first_name != 'JOHNNY';
+
+SELECT *
+FROM sakila.actor
+WHERE actor_id IN (1,2,3,4,5,6,7,8);
+
+SELECT *
+FROM sakila.actor
+WHERE (actor_id = 1 OR 
+		actor_id = 2 OR 
+		actor_id = 3 OR 
+		actor_id = 4 OR 
+		actor_id = 5 OR 
+		actor_id = 6 OR 
+		actor_id = 7 OR 
+		actor_id = 8);
+
+-- NOT IN
+SELECT *
+FROM sakila.actor
+WHERE actor_id NOT IN (1,2,3,4,5,6,7);
+
+-- In Subquery
+
+SELECT actor_id, FIRST_NAME, last_name 
+					FROM sakila.actor
+					WHERE last_name = 'DEGENERES';
+
+/* (41,107,166) */
+
+SELECT *
+FROM sakila.actor
+WHERE first_name IN ('NICK','JOHNNY','JOE','VIVIEN');
+
+SELECT *
+FROM sakila.actor
+WHERE first_name IN ('NICK','JOHNNY','JOE','VIVIEN')
+AND actor_id IN (41,107,166);
+
+-- OUTER QUERY
+SELECT *
+FROM sakila.actor
+WHERE first_name IN ('NICK','JOHNNY','JOE','VIVIEN')
+-- 		OR actor_id IN (41, 107, 166)
+		AND actor_id IN 
+-- INNER QUERY (SUB QUERY)
+					(SELECT actor_id 
+					FROM sakila.actor
+					WHERE last_name = 'DEGENERES');
+
+-- BETWEEN
+SELECT *
+FROM sakila.actor
+WHERE actor_id >= 10 AND actor_id <= 20;
+
+SELECT *
+FROM sakila.actor
+WHERE actor_id BETWEEN 10 AND 20;
+
+SELECT *
+FROM sakila.actor
+WHERE actor_id BETWEEN 11 AND 19;
+
+SELECT *
+FROM sakila.actor
+WHERE actor_id NOT BETWEEN 11 AND 19;
+
+
+-- LIKE WITH WILD CARDS
+SELECT *
+FROM sakila.actor
+WHERE first_name LIKE 'A%';
+
+SELECT *
+FROM sakila.actor
+WHERE first_name LIKE 'Alec%';
+
+SELECT *
+FROM sakila.actor
+WHERE first_name LIKE '%RA%';
+
+SELECT *
+FROM sakila.actor
+WHERE first_name LIKE '%R%A%';
+
+SELECT *
+FROM sakila.actor
+WHERE first_name LIKE '%RA';
+
+SELECT *
+FROM sakila.actor
+WHERE first_name NOT LIKE '%RA';
+
+SELECT *
+FROM sakila.actor
+WHERE first_name LIKE 'AL%';
+
+SELECT *
+FROM sakila.actor
+WHERE first_name LIKE 'A__E';
+
+SELECT *
+FROM sakila.actor
+WHERE first_name LIKE 'A__E%';
+
+SELECT *
+FROM sakila.actor
+WHERE first_name LIKE 'A%E%';
+
+SELECT FIRST_NAME
+FROM sakila.actor
+WHERE NOT (first_name LIKE 'A%E%' AND first_name LIKE 'A%')
+ORDER BY FIRST_NAME;
+
+SELECT FIRST_NAME
+FROM sakila.actor
+WHERE NOT (first_name LIKE 'A%E%' OR first_name LIKE 'A%')
+ORDER BY FIRST_NAME;
+
+-- -----------------------------------------------------
+-- NULL 
+-- -----------------------------------------------------
+SELECT ADDRESS,ADDRESS2 
+FROM sakila.address;
+
+-- ALL ACTORS WITHOUT A SECOND ADDRESS
+SELECT ADDRESS_id, ADDRESS,ADDRESS2 
+FROM address
+WHERE address2 IS NULL;
+
+UPDATE ADDRESS SET ADDRESS2 = 'ADD2'
+WHERE ADDRESS_ID = 5;
+
+UPDATE ADDRESS SET ADDRESS2 = ''
+WHERE ADDRESS_ID = 6;
+
+UPDATE ADDRESS SET ADDRESS2 = NULL
+WHERE ADDRESS_ID = 6;
+
+SELECT * FROM ADDRESS WHERE ADDRESS2 = '';
+
+
+UPDATE ADDRESS SET ADDRESS2 = 'NULL'
+WHERE ADDRESS_ID = 6;
+
+SELECT ADDRESS,ADDRESS2 
+FROM sakila.address
+WHERE address2 = 'NULL';
+
+SELECT ADDRESS,ADDRESS2 
+FROM address
+WHERE address2 IS NOT NULL;
+
+SELECT ADDRESS.ADDRESS2 FROM SAKILA.ADDRESS;
+
+
+-- NO ADDRESS2      [IS NULL]
+-- HAS AN ADDRESS2   [IS NOT NULL]
+-- NULL AND '' ARE EQUAL
+-- NULL REPRESENTS MISSING INFORMATION
+-- '' EMPTY VALUE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
