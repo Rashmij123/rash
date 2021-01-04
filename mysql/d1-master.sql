@@ -232,12 +232,20 @@ SELECT Concat(first_name, "", last_name)                              AS
 FROM   actor;
 
 -- SELECT @CONCATVAR;
-SELECT @concatvar := Concat(first_name, "", last_name)
+SELECT @concatvar := Concat(first_name, " ", last_name)
 FROM   actor;
+
+select @concatvar;
 
 SELECT @concatvar := Concat(first_name, "", last_name)
 FROM   actor
 WHERE  actor_id = 100;
+
+SELECT @concatvar := Concat(first_name, "", last_name)
+FROM   actor
+WHERE  actor_id = 100;
+
+select @concatvar;
 
 SELECT @reversevar := Reverse(@concatvar)
 FROM   actor;
@@ -617,19 +625,45 @@ SELECT ADDRESS.ADDRESS2 FROM SAKILA.ADDRESS;
 -- NULL REPRESENTS MISSING INFORMATION
 -- '' EMPTY VALUE
 
+--ORDER BY clause
+
+SELECT *
+FROM sakila.address
+ORDER BY district;
+
+SELECT district
+FROM sakila.address
+ORDER BY district DESC;
+
+-- all districts starting with A and are null.
+select district from sakila.address where district is null or district like 'A%';
+
+-- select the number of missing values for district.
 
 
+-- CREATE A TABLE
+CREATE TABLE ACTORSAMPLE
+(
+actor_id SMALLINT(5) NOT NULL AUTO_INCREMENT,
+FIRST_NAME VARCHAR(50) NOT NULL,
+last_name VARCHAR(50),
+LAST_UPDATE TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+PRIMARY KEY (ACTOR_ID)
+);
 
+SELECT * FROM ACTORSAMPLE;
 
-
-
-
-
-
-
-
-
-
+-- INSERT ALL FIELDS
+INSERT INTO ACTORSAMPLE VALUES  (100, 'GAUTHAM', 'BUDDHA', '2020-01-04');
+-- INSERT SPECIFIC FIELDS
+INSERT INTO ACTORSAMPLE (FIRST_NAME,last_name,LAST_UPDATE) VALUES  ( 'KRISHNA', 'LORD', '2020-01-04');
+INSERT INTO ACTORSAMPLE (FIRST_NAME,last_name,LAST_UPDATE) VALUES  ( 'RADHA', 'KRISHNA', '2020-01-04');
+INSERT INTO ACTORSAMPLE VALUES  (100, 'GAUTHAM', 'BUDDHA', '2020-01-04');
+INSERT INTO ACTORSAMPLE VALUES  (DEFAULT, 'GAUTHAM', 'BUDDHA', '2020-01-04');
+INSERT INTO ACTORSAMPLE VALUES  (NULL, 'GAUTHAM', 'BUDDHA', '2020-01-04');
+INSERT INTO ACTORSAMPLE VALUES  (DEFAULT, NULL, 'BUDDHAS', '2020-01-04');
+-- INSERT A RECORD AND LET SQL AUTOMATICALLY ADD THE LAST_UPDATE
+INSERT INTO ACTORSAMPLE (first_name,last_name) VALUES ('GOUTHAM','BUDHA');
 
 
 
