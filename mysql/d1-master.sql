@@ -765,15 +765,18 @@ FROM Table2;
 
 
 -- CROSS JION
-SELECT * FROM Table1
+SELECT * FROM Table1;
 CROSS JOIN TABLE2;
 
-
-
-
-
-
-
+-- COMMIT AND ROLLBACK
+show variables;
+SHOW VARIABLES WHERE Variable_name='autocommit';
+SET autocommit = 0;
+/* COMMIT; -- will confirm your changes  */
+/* ROLLBACK -- will undo your previous changes */
+COMMIT;
+DELETE FROM TABLE1;
+ROLLBACK;
 
 
 
