@@ -778,7 +778,16 @@ COMMIT;
 DELETE FROM TABLE1;
 ROLLBACK;
 
-
+-- COMMIT AND ROLLBACK
+show variables;
+SHOW VARIABLES WHERE Variable_name='autocommit';
+SET autocommit = 0;
+SET autocommit = 1;
+/* COMMIT; -- will confirm your changes  */
+/* ROLLBACK -- will undo your previous changes */
+COMMIT;
+DELETE FROM TABLE1;
+ROLLBACK;
 
 
 
