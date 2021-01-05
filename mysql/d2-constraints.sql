@@ -92,3 +92,56 @@ create table countries1
 );
 --  Column 'c_name' cannot be null
 insert into countries1 values ('c1',NULL,1);
+
+-- ALTER TABLE FOR INCLUDING PRIMARY KEY constraint
+create table newbook_mast11
+(
+	book_id varchar(15) ,
+   bookname varchar(15) 
+);
+
+ALTER TABLE newbook_mast11
+MODIFY BOOK_ID INT PRIMARY KEY;
+
+-- DOES NOT REMOVE CONSTRAINT
+ALTER TABLE newbook_mast11
+MODIFY BOOK_ID INT ;
+
+ALTER TABLE newbook_mast11
+DROP PRIMARY KEY;
+
+insert into newbook_mast11 values (null,'monk');
+insert into newbook_mast11 values (1,null);
+-- Duplicate entry '1' for key 'newbook_mast11.PRIMARY'
+insert into newbook_mast11 values (1,null);
+SELECT * FROM newbook_mast11;
+DELETE FROM newbook_mast11;
+DESCRIBE newbook_mast11;
+
+ALTER TABLE newbook_mast11
+DROP COLUMN BOOKNAME;
+
+ALTER TABLE newbook_mast11
+ADD COLUMN BOOKNAME VARCHAR(15);
+
+ALTER TABLE newbook_mast11
+ADD COLUMN BOOKNAME VARCHAR(15) PRIMARY KEY;
+-- Duplicate entry '' for key 'newbook_mast11.PRIMARY'
+
+
+insert into newbook_mast11 values (1,'MONK');
+insert into newbook_mast11 values (1,'MONKS');
+insert into newbook_mast11 values (2,'MONK');
+-- Duplicate entry 'MONK' for key 'newbook_mast11.PRIMARY'
+
+-- DISPLAY THE CONSTRAINT DETAILS
+SHOW CREATE TABLE newbook_mast11;
+SHOW CREATE TABLE Newbook_mast1;
+
+--DISPLAY DETAILED INFORMATION OF CONSTRAINTS
+SELECT * FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+WHERE TABLE_NAME = 'Newbook_mast1';
+
+SELECT TABLE_NAME, COLUMN_NAME, CONSTRAINT_NAME, CONSTRAINT_SCHEMA FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+WHERE TABLE_NAME = 'Newbook_mast1';
+
