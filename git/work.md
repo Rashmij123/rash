@@ -78,3 +78,34 @@ Date:   Tue Jan 5 16:31:02 2021 +0530
 
 ```
 
+:beginner: **branches**  
+```sh
+Enzo@DESKTOP-IFP1VO4 MINGW64 ~/Desktop/mG/jfs (main)
+$ git branch
+* main
+
+Enzo@DESKTOP-IFP1VO4 MINGW64 ~/Desktop/mG/jfs (main)
+$ git branch branch1
+
+Enzo@DESKTOP-IFP1VO4 MINGW64 ~/Desktop/mG/jfs (main)
+$ git branch
+  branch1
+* main
+
+Enzo@DESKTOP-IFP1VO4 MINGW64 ~/Desktop/mG/jfs (main)
+$ git branch -d branch1
+Deleted branch branch1 (was e461faf).
+
+Enzo@DESKTOP-IFP1VO4 MINGW64 ~/Desktop/mG/jfs (main)
+$ git branch
+* main
+
+Enzo@DESKTOP-IFP1VO4 MINGW64 ~/Desktop/mG/jfs (main)
+$ touch 1.txt
+
+Enzo@DESKTOP-IFP1VO4 MINGW64 ~/Desktop/mG/jfs (main)
+$ git add .
+
+```
+
+
