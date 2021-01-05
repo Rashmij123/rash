@@ -77,4 +77,43 @@ Date:   Tue Jan 5 16:31:02 2021 +0530
     OLD COMMITS
 
 ```
+```sh
+Enzo@DESKTOP-IFP1VO4 MINGW64 ~/Desktop/mG/jfs (main)
+$ git add .
+
+Enzo@DESKTOP-IFP1VO4 MINGW64 ~/Desktop/mG/jfs (main)
+$ git commit -m "c3"
+[main 1856217] c3
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 3.txt
+
+Enzo@DESKTOP-IFP1VO4 MINGW64 ~/Desktop/mG/jfs (main)
+$ git log --oneline -5
+1856217 (HEAD -> main) c3
+8eccb7a c1
+e461faf CLEAN UP 1
+b1e923d temp commit
+bfa588a Framed
+
+Enzo@DESKTOP-IFP1VO4 MINGW64 ~/Desktop/mG/jfs (main)
+$ git checkout -b branch2
+Switched to a new branch 'branch2'
+
+Enzo@DESKTOP-IFP1VO4 MINGW64 ~/Desktop/mG/jfs (branch2)
+$ git branch
+  branch1
+* branch2
+  main
+
+Enzo@DESKTOP-IFP1VO4 MINGW64 ~/Desktop/mG/jfs (branch2)
+$ git checkout main
+Switched to branch 'main'
+Your branch is ahead of 'origin/main' by 16 commits.
+  (use "git push" to publish your local commits)
+
+Enzo@DESKTOP-IFP1VO4 MINGW64 ~/Desktop/mG/jfs (main)
+$ git branch -d branch2
+Deleted branch branch2 (was 1856217).
+
+```
 
