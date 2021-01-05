@@ -145,3 +145,35 @@ WHERE TABLE_NAME = 'Newbook_mast1';
 SELECT TABLE_NAME, COLUMN_NAME, CONSTRAINT_NAME, CONSTRAINT_SCHEMA FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
 WHERE TABLE_NAME = 'Newbook_mast1';
 
+-- FOREIGN KEY
+--  A FOREIGN KEY in MySQL creates a link between two tables by one specific column of both tables. The specified column in one table must be a PRIMARY KEY and referred by the column of another table known as FOREIGN KEY.
+-- ALLOWS ONE OR MORE NULL VALUES
+
+CREATE TABLE newauthor1
+(aut_id varchar(8) NOT NULL  PRIMARY KEY ,
+aut_name varchar(50) NOT NULL
+);
+DESCRIBE NEWAUTHOR1;
+
+CREATE TABLE NEWBOOK2
+(BOOK_id varchar(8) NOT NULL  PRIMARY KEY ,
+BOOK_name varchar(50) NOT NULL,
+AUTHOR_ID varchar(8),
+FOREIGN KEY (AUTHOR_ID) REFERENCES newauthor1(aut_id)
+);
+
+insert into newauthor1 values (2,'MONK');
+insert into newauthor1 values (1,'MONKS');
+SELECT * FROM NEWAUTHOR1;
+SELECT * FROM NEWBOOK2;
+DELETE FROM NEWBOOK2;
+DROP TABLE NEWBOOK2;
+insert into NEWBOOK2 values (2,'BNAME', 2);
+-- Cannot add or update a child row: a foreign key constraint fails (`testdb`.`NEWBOOK2`, CONSTRAINT `NEWBOOK2_ibfk_1` FOREIGN KEY (`AUTHOR_ID`) REFERENCES `newauthor1` (`aut_id`))
+insert into NEWBOOK2 values (1,'MONKS',3);
+insert into NEWBOOK2 values (2,'MONKS',NULL);
+insert into NEWBOOK2 values (3,'SKY',NULL);
+insert into NEWBOOK2 values (1,'SKY',1);
+insert into NEWBOOK2 values (10,'SKY',1);
+-- Duplicate entry '10' for key 'newbook2.PRIMARY'
+insert into NEWBOOK2 values (10,'SKY',2);
