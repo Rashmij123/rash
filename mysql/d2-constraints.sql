@@ -69,6 +69,7 @@ insert into newbook_mast_nn values ('null',null);
 insert into newbook_mast_nn values (null,'null');
 
 --A CHECK constraint controls the values in the associated column. The CHECK constraint determines whether the value is valid or not from a logical expression.
+-- IT ALLOWS NULL VALUES.
 
 create table countries
 (
@@ -83,9 +84,11 @@ insert into countries values ('c1',NULL,1);
 -- Check constraint 'countries_chk_1' is violated
 insert into countries values ('c1','JA',1);
 
-create table countries
+create table countries1
 (
 	c_id varchar(15) not null,
    c_name varchar(15) NOT NULL check (c_name  in ('US','IN','UK')),
    c_pin int
 );
+--  Column 'c_name' cannot be null
+insert into countries1 values ('c1',NULL,1);
