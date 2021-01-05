@@ -177,3 +177,32 @@ insert into NEWBOOK2 values (1,'SKY',1);
 insert into NEWBOOK2 values (10,'SKY',1);
 -- Duplicate entry '10' for key 'newbook2.PRIMARY'
 insert into NEWBOOK2 values (10,'SKY',2);
+
+-- multiple foreign keys
+drop table Table1;
+create table Table1
+(
+  id varchar(2),
+  name varchar(2),
+  PRIMARY KEY (id)
+);
+
+Create table Table1_Addr
+(
+  addid varchar(2),
+  Address varchar(2),
+  PRIMARY KEY (addid)
+);
+
+drop table Table1_sal;
+Create table Table1_sal
+(
+  FOREIGN KEY (addid) REFERENCES Table1_Addr(addid),
+  salid varchar(2),
+  addid varchar(2),
+  id varchar(2),
+  PRIMARY KEY (salid),
+  FOREIGN KEY (id) REFERENCES Table1(id)
+)
+
+select * from Table1_sal;
