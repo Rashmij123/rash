@@ -107,5 +107,41 @@ Enzo@DESKTOP-IFP1VO4 MINGW64 ~/Desktop/mG/jfs (main)
 $ git add .
 
 ```
+```sh
+Enzo@DESKTOP-IFP1VO4 MINGW64 ~/Desktop/mG/jfs (main)
+$ git commit -m "c1"
+[main 8eccb7a] c1
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 1.txt
+
+Enzo@DESKTOP-IFP1VO4 MINGW64 ~/Desktop/mG/jfs (main)
+$ git log --oneline -5
+8eccb7a (HEAD -> main) c1
+e461faf CLEAN UP 1
+b1e923d temp commit
+bfa588a Framed
+a70a129 Painted
+
+Enzo@DESKTOP-IFP1VO4 MINGW64 ~/Desktop/mG/jfs (main)
+$ git branch branch1
+
+Enzo@DESKTOP-IFP1VO4 MINGW64 ~/Desktop/mG/jfs (main)
+$ git checkout branch1
+Switched to branch 'branch1'
+M       git/work.md
+
+Enzo@DESKTOP-IFP1VO4 MINGW64 ~/Desktop/mG/jfs (branch1)
+$ touch 2.txt
+
+Enzo@DESKTOP-IFP1VO4 MINGW64 ~/Desktop/mG/jfs (branch1)
+$ git add .
+
+Enzo@DESKTOP-IFP1VO4 MINGW64 ~/Desktop/mG/jfs (branch1)
+$ git commit -m "c2"
+[branch1 fc5f2b4] c2
+ 2 files changed, 31 insertions(+)
+ create mode 100644 2.txt
+
+```
 
 
