@@ -210,3 +210,43 @@ Create table Table1_sal
 )
 
 select * from Table1_sal;
+
+-- ON DELETE CASCADE
+-- CASCADE: Delete or update the row from the parent table and automatically delete or update the matching rows in the child table. Both ON DELETE CASCADE and ON UPDATE CASCADE are supported. 
+use livedb;
+DROP TABLE ROOMS;
+DROP TABLE BUILDINGS;
+
+
+CREATE TABLE buildings (
+    building_no INT PRIMARY KEY AUTO_INCREMENT,
+    building_name VARCHAR(255) NOT NULL,
+    address VARCHAR(255) NOT NULL
+);
+CREATE TABLE rooms (
+    room_no INT PRIMARY KEY AUTO_INCREMENT,
+    room_name VARCHAR(255) NOT NULL,
+    building_no INT  NULL,
+    FOREIGN KEY (building_no)
+        REFERENCES buildings (building_no)
+       -- ON DELETE CASCADE
+       ON DELETE SET NULL
+);
+
+
+INSERT INTO buildings(building_name,address)
+VALUES('ACME Headquaters','3950 North 1st Street CA 95134'),
+      ('ACME Sales','5000 North 1st Street CA 95134');
+
+INSERT INTO rooms(room_name,building_no)
+VALUES('Amazon',1),
+      ('War Room',1),
+      ('Office of CEO',1),
+      ('Marketing',2),
+      ('Showroom',2);
+
+SELECT * FROM BUILDINGS;
+SELECT * FROM rooms;
+DELETE FROM buildings WHERE building_no = 2;
+SELECT * FROM rooms;
+
