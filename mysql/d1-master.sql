@@ -1,3 +1,8 @@
+------------DATABASE COMMANDS-------------
+CREATE DATABASE OLDDB;
+SHOW DATABASES;
+SELECT DATABASE();
+
 USE sakila;
 
 -- Fetch static value
